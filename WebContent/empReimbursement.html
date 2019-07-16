@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Reimbursement Form</title>
+<link rel="stylesheet" type="text/css" href="css\loggedin.css?v=1">
+<script src="JavaScript\site.js"></script>
+<style>
+h1{
+	text-align:center;
+	text-shadow: 3px 3px orange;
+	font-size:50px;
+	font-family: "Times New Roman", Times, serif;
+}
+
+table{margin-left:auto; 
+	margin-right:auto; }
+
+table,td{border: none; text-align: center;}
+
+table th{
+
+	background: #ffd65c;
+	border-color: black;
+	font-size: 20px;
+	border:none;
+	padding:10px;
+	text-align: center;
+}
+
+table tr:nth-child(even) {background-color: #615c4e; color: white;}
+table tr:hover {background-color: #f5f5f5;color: black;}
+
+table tbody{
+	font-size: 20px;
+	border:none;
+	padding: 70px;
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ff8c00), color-stop(1, #f06800));
+	background:-moz-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-webkit-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-o-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-ms-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:linear-gradient(to bottom, #ff8c00 5%, #f06800 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8c00', endColorstr='#f06800',GradientType=0);
+	background-color:#ff8c00;
+	-moz-border-radius:24px;
+	-webkit-border-radius:24px;
+	border-radius:24px;
+	border:4px solid #050100;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:18px;
+	padding:10px 24px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #854629;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f06800), color-stop(1, #ff8c00));
+	background:-moz-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-webkit-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-o-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-ms-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:linear-gradient(to bottom, #f06800 5%, #ff8c00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f06800', endColorstr='#ff8c00',GradientType=0);
+	background-color:#f06800;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+div{text-align: center;}
+
+
+</style>
+</head>
+<body>
+	<ul>
+		<li><img class="image" src="images\revature-logo-600x219.png"
+			height="40" width="100"></li>
+		<li><a class="active" href="employeeHomepage.html"><b>Home</b></a></li>
+		<li><a href="empReimbursement.html"><b>Reimbursement</b></a></li>
+		<li><a href="empInformation.html"><b>Information</b></a></li>
+		<li><a href="logout.do"><b>Logout</b></a></li>
+	</ul>
+	<br/>
+	<br/>
+	<h1>Reimbursements</h1>
+	<div>
+
+	<h2>View Reimbursements</h2>
+
+	<button class="myButton" onclick="deleteCurrentRows(),loadEmpPendingReimbursements()">Pending
+		Reimbursements</button>
+	<button class="myButton" onclick="deleteCurrentRows(), loadEmpCompletedReimbursements()">Completed
+		Reimbursements</button>
+<br/>
+<br/>
+	<table id="reimbursementTable" class="table" border="1">
+		<thead>
+			<tr>
+				<th>Reimbursement ID</th>
+				<th>Status</th>
+				<th>Amount</th>
+				<th>Employee ID</th>
+				<th>Manager ID</th>
+				<th>Reimbursement Type</th>
+				<th>Reimbursement Reason</th>
+				<th>Approval Status</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+	<br />
+	<br />
+	<img src="images\submitimburse.png">;
+
+	<form id="submitReimbursement" method="post" enctype="multipart/form-data" action="submitReimburse.do" >
+	<b>Reimbursement Type:</b>
+	<select id="reimburseType" name="reimbursementType">
+  		<option value="relocation">Relocation</option>
+  		<option value="certification">Certification</option>
+  		<option value="companyExpense">Company Expense</option>
+  		<option value="other">Other</option>
+	</select>
+	<br/>
+	<br/>
+	<b>Reimbursement Amount:</b> 
+	<input id="reimburseAmt" type = "text" name = "reimbursementAmount" required/>
+	<br/>
+	<br/>
+	<b>Reason for Reimbursement:</b>
+	<br/>
+	<textarea id = "reimburseReason"rows="4" cols="50" name="reason" form="submitReimbursement">Reason For Reimbursement</textarea>
+	<br/>
+	<br/>
+	<b>Receipt Image <i>(Optional)</i>:</b><input id="receipt" type="file" name="receipt" multiple>
+	<br/>
+	<br/>
+		<button class="myButton" id="submitButton" type="submit" formtarget="_blank">Submit Reimbursement</button>
+	</form>
+	<br/>
+	<br/>
+	<br/>
+	</div>
+	<script>
+
+
+</script>
+
+
+</body>
+</html>

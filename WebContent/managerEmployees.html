@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Manager Employees Page</title>
+<link rel="stylesheet" type="text/css" href="css\loggedin.css?v=1">
+<script src="JavaScript\site.js"></script>
+<style>
+h1{
+	text-align:center;
+	text-shadow: 3px 3px orange;
+	font-size:50px;
+	font-family: "Times New Roman", Times, serif;
+}
+
+table{margin-left:auto; 
+	margin-right:auto; }
+
+table,td{border: none; text-align: center;}
+
+table th{
+
+	background: #ffd65c;
+	border-color: black;
+	font-size: 20px;
+	border:none;
+	padding:10px;
+	text-align: center;
+}
+
+table tr:nth-child(even) {background-color: #615c4e; color: white;}
+table tr:hover {background-color: #f5f5f5;color: black;}
+
+table tbody{
+	font-size: 20px;
+	border:none;
+	padding: 70px;
+}
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	box-shadow:inset 0px 1px 0px 0px #fa6c00;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ff8c00), color-stop(1, #f06800));
+	background:-moz-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-webkit-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-o-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:-ms-linear-gradient(top, #ff8c00 5%, #f06800 100%);
+	background:linear-gradient(to bottom, #ff8c00 5%, #f06800 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8c00', endColorstr='#f06800',GradientType=0);
+	background-color:#ff8c00;
+	-moz-border-radius:24px;
+	-webkit-border-radius:24px;
+	border-radius:24px;
+	border:4px solid #050100;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:18px;
+	padding:10px 24px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #854629;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f06800), color-stop(1, #ff8c00));
+	background:-moz-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-webkit-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-o-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:-ms-linear-gradient(top, #f06800 5%, #ff8c00 100%);
+	background:linear-gradient(to bottom, #f06800 5%, #ff8c00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f06800', endColorstr='#ff8c00',GradientType=0);
+	background-color:#f06800;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+div{text-align: center;}
+
+</style>
+</head>
+<body>
+	<ul>
+		<li><img class="image" src="images\revature-logo-600x219.png"
+			height="40" width="100"></li>
+		<li><a class="active" href="managerHomepage.html"><b>Home</b></a></li>
+		<li><a href="managerReimbursements.html"><b>Manage
+					Reimbursements</b></a></li>
+		<li><a href="managerEmployees.html"><b>Manage Employees</b></a></li>
+		<li><a href="logout.do"><b>Logout</b></a></li>
+	</ul>
+	<br />
+	<br />
+	<h1>Manage Employees</h1>
+	<div>
+
+	<button class="myButton" onclick="deleteCurrentRows(), loadEmployees()">View All Employees</button> 
+<br>
+<br>
+
+ <table id="employeesTable" class="table" border="1">
+            <thead><tr><th>Employee ID</th><th>Employee E-Mail</th>
+           <th>First Name</th><th>Last Name</th>
+            <th>Address</th><th>City</th>
+            <th>State</th><th>Job Title</th>
+            </tr></thead>
+            <tbody>
+                
+            </tbody>
+    </table>
+    <br/>
+    <br/>
+    <img src="images\createnewemp.png">
+
+<br/>
+<br/>
+<form id="submitemp" method="post" onsubmit="return submitEmployee()">
+
+	<b>New Employee Email:</b> <br/>
+	<input id="email" type = "text" name = "employeeEmail" required/> <br/>
+	<br>
+	<b>First Name:</b> <br/>
+	<input id ="firstname" type = "text" name = "employeeFirstName" required/> <br/>
+	<br>
+	<b>Last Name:</b> <br/>
+	<input id="lastname" type = "text" name = "employeeLastName" required/> <br/>
+	<br>
+	<b>Address:</b> 
+	<input id="address" type = "text"  name = "employeeAddress" required/> 
+	<b>City:</b> 
+	<input id="city" type = "text"  name = "employeeCity" required/> 
+	<b>State:</b><select id="state" name="employeeState">
+	<option  value="blank"> </option>
+		<option value="Alabama">Alabama</option>
+  		<option value="Alaska">Alaska</option>
+  		<option value="Arizona">Arizona</option>
+  		<option value="Arkansas">Arkansas</option>
+  		<option value="California">California</option>
+  		<option value="Colorado">Colorado</option>
+  		<option value="Connecticut">Connecticut</option>
+  		<option value="Delaware">Delaware</option>
+  		<option value="Florida">Florida</option>
+  		<option value="Georgia">Georgia</option>
+  		<option value="Hawaii">Hawaii</option>
+  		<option value="Idaho">Idaho</option>
+  		<option value="Illinois">Illinois</option>
+  		<option value="Indiana">Indiana</option>
+  		<option value="Iowa">Iowa</option>
+  		<option value="Kansas">Kansas</option>
+  		<option value="Kentucky">Kentucky</option>
+  		<option value="Louisiana">Louisiana</option>
+  		<option value="Maine">Maine</option>
+  		<option value="Maryland">Maryland</option>
+  		<option value="Massachusetts">Massachusetts</option>
+  		<option value="Michigan">Michigan</option>
+  		<option value="Minnesota">Minnesota</option>
+  		<option value="Mississippi">Mississippi</option>
+  		<option value="Missouri">Missouri</option>
+  		<option value="Montana">Montana</option>
+  		<option value="Nebraska">Nebraska</option>
+  		<option value="Nevada">Nevada</option>
+  		<option value="NewHampshire">New Hampshire</option>
+  		<option value="New Jersey">New Jersey</option>
+  		<option value="NewMexico">New Mexico</option>
+  		<option value="NorthCarolina">North Carolina</option>
+  		<option value="NorthDakota">North Dakota</option>
+  		<option value="Ohio">Ohio</option>
+  		<option value="Oklahoma">Oklahoma</option>
+  		<option value="Oregon">Oregon</option>
+  		<option value="Pennsylvania">Pennsylvania</option>
+ 	 	<option value="RhodeIsland">Rhode Island</option>
+ 	 	<option value="SouthCarolina">South Carolina</option>
+ 	 	<option value="SouthDakota">South Dakota</option>
+ 	 	<option value="Tennessee">Tennessee</option>
+ 	 	<option value="Texas">Texas</option>
+ 	 	<option value="Utah">Utah</option>
+ 	 	<option value="Vermont">Vermont</option>
+ 	 	<option value="Virginia">Virginia</option>
+  		<option value="Washington">Washington</option>
+  		<option value="WestVirginia">West Virginia</option>
+  		<option value="Wisconsin">Wisconsin</option>
+  		<option value="Wyoming">Wyoming</option>
+</select><br/>
+<br/>
+  <b>Job Title:</b> <br/>
+	<i>Trainee:</i> <input class="jobtitle" type="radio" name="employeeJobTitle" value="Trainee" >
+	<i>Recruiter:</i> <input class="jobtitle" type="radio" name="employeeJobTitle" value="Recruiter" >
+    <i>Other:</i> <input  class="jobtitle" type="radio" name="employeeJobTitle" value="Other" >
+	<br>
+	<br>
+  <button class="myButton"  type ="submit">Create Employee</button>
+  
+</form>
+
+	</div>
+</body>
+</html>
